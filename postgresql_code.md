@@ -41,12 +41,20 @@ INSERT INTO galaxy(name, constellation, type, year_disc, distance_earth_Mly, siz
                     
 INSER INTO star(Galaxy_id, name, type, year_disc, have_planets, n_planets)
   VALUES(1, 
-    'Sun', 'spectral (G2V), 450, TRUE, 8),
-    (1, 'Kepler-1649', 'red dwarf (M5V)', 2020, TRUE, 2),
-    (5, 'Gliese 163', 'm-type (M3V)', 2012, TRUE, 5)
-    (2, 'Alpha_andromedae', 'early-type A (A3V)', 1993, FALSE, 0),
-    (2, 'Mirach', 'red giant (M0III)', 1521, FALSE, 0),
-    
+    'Sun', 'G2V, 450, TRUE, 8),
+    (1, 'Kepler-1649', 'M5V', 2020, TRUE, 2),
+    (5, 'Gliese 163', 'M3V', 2012, TRUE, 5)
+    (2, 'Alpha_andromedae', 'A3V', 1993, FALSE, 0),
+    (2, 'Mirach', 'M0III', 1521, FALSE, 0),
+    (2, '51_pegasi', 'G2IV', 1995, TRUE, 1, 
+    (3, 'Delta_Centauri', 'B-type', NULL, FALSE, 0),
+    (4, 'Canis_Major', 'DA2', 2000, NULL, NULL),
+    (3, 'L 98-59', 'M3V', 2019, TRUE, 4),
+    (1, 'Antares', 'B2.5V', 1819, FALSE, 0),
+    (1, 'Mu_Cephei', 'M2-Ia', 1881, FALSE, 0),
+    (1, 'WASP-39 ', 'G8', 2011, TRUE, 1),
+    (1, 'KOI-268', NULL, 2013, TRUE, 1
+        );
     
    
   CREATE TABLE planet(
@@ -70,12 +78,12 @@ INSER INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons)
     (1, 'Jupiter', 139820, 1610, TRUE, 80),
     (1, 'Neptune', 49244, 1846, TRUE, 14),
     (2, 'Kepler-1649c', 6753.3, 2020, NULL, NULL),
-    (3, 'Gliese 163 c', 28000, 2012, NULL, NULL),
-    
-    
-    
-  
-               
+    (3, 'Gliese-163c', 28000, 2012, NULL, NULL),
+    (6, '51_Pegasi_b', 135830 ,1995, FALSE, 0),
+    (9, 'L 98-59-f', 3140, 2021, NULL, NULL),
+    (12, 'Bocaprins',167820, 2011, NULL, NULL),
+    (13, 'KOI-268.01', 112000, 2013, TRUE, 1
+        );
 
  CREATE TABLE moom(
                     star_id SERIAL UNIQUE, 
