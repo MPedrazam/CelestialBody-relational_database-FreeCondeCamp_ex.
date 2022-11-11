@@ -4,15 +4,15 @@ psql --username=freecodecamp --dbname=postgres
 
 CREATE DATABASE Universe;
 
-CREATE TABLE obs_tech(
-                    obs_tech_id SERIAL UNIQUE PRIMARY KEY, 
+CREATE TABLE tech(
+                    tech_id SERIAL UNIQUE PRIMARY KEY, 
                     name VARCHAR UNIQUE NOT NULL, 
                     dev_year NUMERIC, 
                     country TEXT,
                     developer VARCHAR 
                     );
   
-INSERT INTO obs_tech(name, dev_year, country, developer) 
+INSERT INTO tech(name, dev_year, country, developer) 
   VALUES (
      'optical', 1608,'Germany-Dutch', 'Hans Lippershey'),
      ('occultation', 1590, 'Germany', 'Michael Maestlin'),
@@ -29,8 +29,8 @@ CREATE TABLE galaxy(
                     year_disc NUMERIC,
                     distance_earth_Mly FLOAT,
                     size_ly INT,
-                    Tech_id INT,
-                    CONSTRAINT FK_tech_galaxy FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id)
+                    tech_id INT,
+                    CONSTRAINT FK_tech_galaxy FOREIGN KEY (tech_id) REFERENCES tech(tech_id)
                     );
   
 
@@ -53,26 +53,26 @@ CREATE TABLE star(
                     year_disc NUMERIC,
                     have_planets BOOLEAN,
                     n_planets INT,
-                    Tech_id INT, 
-                    CONSTRAINT FK_tech_star FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id),
+                    tech_id INT, 
+                    CONSTRAINT FK_tech_star FOREIGN KEY (tech_id) REFERENCES tech(tech_id),
                     CONSTRAINT FK_galaxy_star FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
                     );
                     
 INSERT INTO star(Galaxy_id, name, type, year_disc, have_planets, n_planets, tech_id)
-  VALUES(6, 
+  VALUES(1, 
     'Sun', 'G2V', 450, TRUE, 8, 1),
-    (6, 'Kepler-1649', 'M5V', 2020, TRUE, 2, 4),
-    (10, 'Gliese 163', 'M3V', 2012, TRUE, 5, 3),
-    (7, 'Alpha_andromedae', 'A3V', 1993, FALSE, 0, 3),
-    (7, 'Mirach', 'M0III', 1521, FALSE, 0, 5),
-    (7, '51_pegasi', 'G2IV', 1995, TRUE, 1, 3), 
-    (8, 'Delta_Centauri', 'B-type', NULL, FALSE, 0, 3),
-    (9, 'Canis_Major', 'DA2', 2000, NULL, NULL, 4),
-    (8, 'L 98-59', 'M3V', 2019, TRUE, 4, 3),
-    (6, 'Antares', 'B2.5V', 1819, FALSE, 0, 3),
-    (6, 'Mu_Cephei', 'M2-Ia', 1881, FALSE, 0, 5),
-    (6, 'WASP-39 ', 'G8', 2011, TRUE, 1, 4),
-    (6, 'KOI-268', NULL, 2013, TRUE, 1, 3
+    (1, 'Kepler-1649', 'M5V', 2020, TRUE, 2, 4),
+    (5, 'Gliese 163', 'M3V', 2012, TRUE, 5, 3),
+    (2, 'Alpha_andromedae', 'A3V', 1993, FALSE, 0, 3),
+    (2, 'Mirach', 'M0III', 1521, FALSE, 0, 5),
+    (2, '51_pegasi', 'G2IV', 1995, TRUE, 1, 3), 
+    (3, 'Delta_Centauri', 'B-type', NULL, FALSE, 0, 3),
+    (4, 'Canis_Major', 'DA2', 2000, NULL, NULL, 4),
+    (3, 'L 98-59', 'M3V', 2019, TRUE, 4, 3),
+    (1, 'Antares', 'B2.5V', 1819, FALSE, 0, 3),
+    (1, 'Mu_Cephei', 'M2-Ia', 1881, FALSE, 0, 5),
+    (1, 'WASP-39 ', 'G8', 2011, TRUE, 1, 4),
+    (1, 'KOI-268', NULL, 2013, TRUE, 1, 3
         );
     
    
@@ -85,24 +85,24 @@ CREATE TABLE planet(
                     have_moons BOOLEAN,
                     n_moons INT,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_planet FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id),
+                    CONSTRAINT FK_tech_planet FOREIGN KEY (tech_id) REFERENCES tech(tech_id),
                     CONSTRAINT FK_star_planet FOREIGN KEY (star_id) REFERENCES star(star_id)
                     );
 
 INSERT INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons, tech_id)
   VALUES(
-    14,'Earth', 12742, NULL, TRUE, 1, 2),
-    (14, 'Mars', 6778, 1610, TRUE, 2, 1),
-    (14, 'Mercury', 4871.4, 1631, FALSE, 0, 1),
-    (14, 'Venus', 12104, 1610, FALSE, 0, 1),
-    (14, 'Jupiter', 139820, 1610, TRUE, 80, 1),
-    (14, 'Neptune', 49244, 1846, TRUE, 14, 1),
-    (15, 'Kepler-1649c', 6753.3, 2020, NULL, NULL, 3),
-    (16, 'Gliese-163c', 28000, 2012, NULL, NULL, 2),
-    (18, '51_Pegasi_b', 135830 ,1995, FALSE, 0, 2),
-    (22, 'L 98-59-f', 3140, 2021, NULL, NULL, 2),
-    (25, 'Bocaprins',167820, 2011, NULL, NULL, 2),
-    (16, 'KOI-268.01', 112000, 2013, TRUE, 1, 2
+    27,'Earth', 12742, NULL, TRUE, 1, 2),
+    (27, 'Mars', 6778, 1610, TRUE, 2, 1),
+    (27, 'Mercury', 4871.4, 1631, FALSE, 0, 1),
+    (27, 'Venus', 12104, 1610, FALSE, 0, 1),
+    (27, 'Jupiter', 139820, 1610, TRUE, 80, 1),
+    (27, 'Neptune', 49244, 1846, TRUE, 14, 1),
+    (28, 'Kepler-1649c', 6753.3, 2020, NULL, NULL, 3),
+    (29, 'Gliese-163c', 28000, 2012, NULL, NULL, 2),
+    (31, '51_Pegasi_b', 135830 ,1995, FALSE, 0, 2),
+    (35, 'L 98-59-f', 3140, 2021, NULL, NULL, 2),
+    (38, 'Bocaprins',167820, 2011, NULL, NULL, 2),
+    (39, 'KOI-268.01', 112000, 2013, TRUE, 1, 2
         );
 
 CREATE TABLE moon(
@@ -112,7 +112,7 @@ CREATE TABLE moon(
                     size_km FLOAT, 
                     year_disc NUMERIC,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_moom FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id),
+                    CONSTRAINT FK_tech_moom FOREIGN KEY (tech_id) REFERENCES tech(tech_id),
                     CONSTRAINT FK_planet_moom FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
                     );
     
