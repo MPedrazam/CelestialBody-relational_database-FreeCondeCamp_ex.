@@ -66,7 +66,7 @@ INSER INTO star(Galaxy_id, name, type, year_disc, have_planets, n_planets)
                     have_moons BOOLEAN,
                     n_moons INT,
                     Tech_id INT, 
-                    CONSTRAINT PK_star PRIMARY KEY (star_id)
+                    CONSTRAINT PK_planet PRIMARY KEY (planet_id)
                     );
 
 INSER INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons)
@@ -86,17 +86,43 @@ INSER INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons)
         );
 
  CREATE TABLE moom(
-                    star_id SERIAL UNIQUE, 
-                    Galaxy_id INT,
+                    moon_id SERIAL UNIQUE, 
+                    planet_id INT,
                     name VARCHAR NOT NULL, 
-                    type VARCHAR, 
+                    size_km FLOAT, 
                     year_disc NUMERIC,
-                    have_planets BOOLEAN,
-                    n_planets INT,
                     Tech_id INT, 
-                    CONSTRAINT PK_star PRIMARY KEY (star_id)
+                    CONSTRAINT PK_moon PRIMARY KEY (moon_id)
                     );
     
+INSER INTO moon(planet_id, name, size_km, year_disc)
+  VALUES(
+    1, 'Moon', 1731.4, 428),
+    (2, 'Phobos', 11267, 1877),
+    (2, 'Deimos', 6.2, 1877),
+    (5, 'Io', 1821.6, 1610),
+    (5, 'Europa', 1560.8, 1610),
+    (5, 'Ganymede', 2631, 1610),
+    (5, 'Calisto', 2410.3, 1610),
+    (5, 'Amalthea', 83.5, 1979),
+    (6, 'Triton', 1353.4, 1846),
+    (6, 'Nereid', 170, 1949),
+    (6, 'Galatea', 87.4, 1989),
+    (6, 'Despina', 75, 1989),
+    (6, 'Proteus', 210, 1989),
+    (6, 'Thalassa', 41, 1989),
+    (6, 'Halimede', 31, 2002),
+    (12, 'OI-268.01_moon', NULL, 2013);
+ 
+ CREATE TABLE Obs_tech(
+                    tech_id SERIAL UNIQUE, 
+                    name VARCHAR NOT NULL, 
+                    dev_year NUMERIC, 
+                    country TEXT,
+                    developer VARCHAR, 
+                    CONSTRAINT PK_obs_tech PRIMARY KEY (tech_id)
+                    );
+        
   
   
   
