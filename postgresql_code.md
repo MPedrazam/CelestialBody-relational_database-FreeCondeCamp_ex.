@@ -132,7 +132,3 @@ INSERT INTO obs_tech(name, dev_year, country, developer)
      ('X-ray astronomy', 1927, 'USA', 'US_Naval_Research_Laboratory'), 
      ('infrared', 1830, 'Scotland', 'Charles Piazzi Smyth'),
      ('radio_astronomy', 1933, 'USA','Karl_Jansky');
-  
- 
-FOREIGN KEY(fk_columns) 
-   REFERENCES parent_table(parent_key_columns)
