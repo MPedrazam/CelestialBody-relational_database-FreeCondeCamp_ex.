@@ -4,6 +4,23 @@ psql --username=freecodecamp --dbname=postgres
 
 CREATE DATABASE Universe;
 
+CREATE TABLE obs_tech(
+                    tech_id SERIAL UNIQUE PRIMARY KEY, 
+                    name VARCHAR NOT NULL, 
+                    dev_year NUMERIC, 
+                    country TEXT,
+                    developer VARCHAR 
+                    );
+  
+INSERT INTO obs_tech(name, dev_year, country, developer) 
+  VALUES (
+     'optical', 1608,'Germany-Dutch', 'Hans Lippershey'),
+     ('occultation', 1590, 'Germany', 'Michael Maestlin'),
+     ('X-ray astronomy', 1927, 'USA', 'US_Naval_Research_Laboratory'), 
+     ('infrared', 1830, 'Scotland', 'Charles Piazzi Smyth'),
+     ('radio_astronomy', 1933, 'USA','Karl_Jansky');
+
+
 CREATE TABLE galaxy(
                     galaxy_id SERIAL UNIQUE PRIMARY KEY, 
                     name VARCHAR NOT NULL, 
@@ -95,7 +112,7 @@ CREATE TABLE moom(
                     year_disc NUMERIC,
                     Tech_id INT, 
                     CONSTRAINT FK_tech_moom FOREIGN KEY (tech_id) REFERENCES obs_tech(tech_id),
-                    CONSTRAINT FK_planet_moom FOREIGN KEY (moom_id) REFERENCES moom(moom_id)
+                    CONSTRAINT FK_planet_moom FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
                     );
     
 INSER INTO moon(planet_id, name, size_km, year_disc, tech_id)
@@ -116,19 +133,3 @@ INSER INTO moon(planet_id, name, size_km, year_disc, tech_id)
     (6, 'Thalassa', 41, 1989, 2),
     (6, 'Halimede', 31, 2002, 2),
     (12, 'OI-268.01_moon', NULL, 2013, 3);
- 
-CREATE TABLE obs_tech(
-                    tech_id SERIAL UNIQUE PRIMARY KEY, 
-                    name VARCHAR NOT NULL, 
-                    dev_year NUMERIC, 
-                    country TEXT,
-                    developer VARCHAR, 
-                    );
-  
-INSERT INTO obs_tech(name, dev_year, country, developer) 
-  VALUES (
-     'optical', 1608,'Germany-Dutch', 'Hans Lippershey'),
-     ('occultation', 1590, 'Germany', 'Michael Maestlin'),
-     ('X-ray astronomy', 1927, 'USA', 'US_Naval_Research_Laboratory'), 
-     ('infrared', 1830, 'Scotland', 'Charles Piazzi Smyth'),
-     ('radio_astronomy', 1933, 'USA','Karl_Jansky');
