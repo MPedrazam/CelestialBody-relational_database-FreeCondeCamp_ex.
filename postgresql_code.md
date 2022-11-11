@@ -5,8 +5,8 @@ psql --username=freecodecamp --dbname=postgres
 CREATE DATABASE Universe;
 
 CREATE TABLE obs_tech(
-                    tech_id SERIAL UNIQUE PRIMARY KEY, 
-                    name VARCHAR NOT NULL, 
+                    obs_tech_id SERIAL UNIQUE PRIMARY KEY, 
+                    name VARCHAR UNIQUE NOT NULL, 
                     dev_year NUMERIC, 
                     country TEXT,
                     developer VARCHAR 
@@ -23,14 +23,14 @@ INSERT INTO obs_tech(name, dev_year, country, developer)
 
 CREATE TABLE galaxy(
                     galaxy_id SERIAL UNIQUE PRIMARY KEY, 
-                    name VARCHAR NOT NULL, 
+                    name VARCHAR UNIQUE NOT NULL, 
                     constellation TEXT, 
                     type VARCHAR, 
                     year_disc NUMERIC,
                     distance_earth_Mly FLOAT,
                     size_ly INT,
                     Tech_id INT,
-                    CONSTRAINT FK_tech_galaxy FOREIGN KEY (tech_id) REFERENCES obs_tech(tech_id)
+                    CONSTRAINT FK_tech_galaxy FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id)
                     );
   
 
@@ -48,13 +48,13 @@ INSERT INTO galaxy(name, constellation, type, year_disc, distance_earth_Mly, siz
 CREATE TABLE star(
                     star_id SERIAL UNIQUE PRIMARY KEY, 
                     galaxy_id INT,
-                    name VARCHAR NOT NULL, 
+                    name VARCHAR UNIQUE NOT NULL, 
                     type VARCHAR, 
                     year_disc NUMERIC,
                     have_planets BOOLEAN,
                     n_planets INT,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_star FOREIGN KEY (tech_id) REFERENCES obs_tech(tech_id),
+                    CONSTRAINT FK_tech_star FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id),
                     CONSTRAINT FK_galaxy_star FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
                     );
                     
@@ -79,13 +79,13 @@ INSERT INTO star(Galaxy_id, name, type, year_disc, have_planets, n_planets, tech
 CREATE TABLE planet(
                     planet_id SERIAL UNIQUE PRIMARY KEY, 
                     star_id INT,
-                    name VARCHAR NOT NULL, 
+                    name VARCHAR UNIQUE NOT NULL, 
                     size_km FLOAT, 
                     year_disc NUMERIC,
                     have_moons BOOLEAN,
                     n_moons INT,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_planet FOREIGN KEY (tech_id) REFERENCES obs_tech(tech_id),
+                    CONSTRAINT FK_tech_planet FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id),
                     CONSTRAINT FK_star_planet FOREIGN KEY (star_id) REFERENCES star(star_id)
                     );
 
@@ -108,11 +108,11 @@ INSERT INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons, tech_
 CREATE TABLE moon(
                     moon_id SERIAL UNIQUE PRIMARY KEY, 
                     planet_id INT,
-                    name VARCHAR NOT NULL, 
+                    name VARCHAR UNIQUE NOT NULL, 
                     size_km FLOAT, 
                     year_disc NUMERIC,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_moom FOREIGN KEY (tech_id) REFERENCES obs_tech(tech_id),
+                    CONSTRAINT FK_tech_moom FOREIGN KEY (obs_tech_id) REFERENCES obs_tech(obs_tech_id),
                     CONSTRAINT FK_planet_moom FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
                     );
     
