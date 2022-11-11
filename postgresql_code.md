@@ -40,7 +40,8 @@ INSERT INTO galaxy(name, constellation, type, year_disc, distance_earth_Mly, siz
     ('Andromeda', 'Andromeda', 'barred_spiral', 964, 2537, 110000, 1),
     ('Centaurus_A', 'Centaurus', 'elliptical', 1826, 13.5, 48500, 1),
     ('Canis_Major_dwarf', 'Canis_Major', 'irregular', 2003, 0.025, 16800, 1),
-    ('Large_Magellanic_cloud', 'Dorado', 'barred_dwarf_spiral', 1913, 0.163, 7000, 1
+    ('Large_Magellanic_cloud', 'Dorado', 'barred_dwarf_spiral', 1913, 0.163, 7000, 1),
+    ('Sombrero', 'Virgo', 'elliptical', NULL, 0.490, 25000 ,2
           );
     
     
