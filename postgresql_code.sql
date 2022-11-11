@@ -91,18 +91,18 @@ CREATE TABLE planet(
 
 INSERT INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons, tech_id)
   VALUES(
-    27,'Earth', 12742, NULL, TRUE, 1, 2),
-    (27, 'Mars', 6778, 1610, TRUE, 2, 1),
-    (27, 'Mercury', 4871.4, 1631, FALSE, 0, 1),
-    (27, 'Venus', 12104, 1610, FALSE, 0, 1),
-    (27, 'Jupiter', 139820, 1610, TRUE, 80, 1),
-    (27, 'Neptune', 49244, 1846, TRUE, 14, 1),
-    (28, 'Kepler-1649c', 6753.3, 2020, NULL, NULL, 3),
-    (29, 'Gliese-163c', 28000, 2012, NULL, NULL, 2),
-    (31, '51_Pegasi_b', 135830 ,1995, FALSE, 0, 2),
-    (35, 'L 98-59-f', 3140, 2021, NULL, NULL, 2),
-    (38, 'Bocaprins',167820, 2011, NULL, NULL, 2),
-    (39, 'KOI-268.01', 112000, 2013, TRUE, 1, 2
+    1,'Earth', 12742, NULL, TRUE, 1, 2),
+    (1, 'Mars', 6778, 1610, TRUE, 2, 1),
+    (1, 'Mercury', 4871.4, 1631, FALSE, 0, 1),
+    (1, 'Venus', 12104, 1610, FALSE, 0, 1),
+    (1, 'Jupiter', 139820, 1610, TRUE, 80, 1),
+    (1, 'Neptune', 49244, 1846, TRUE, 14, 1),
+    (2, 'Kepler-1649c', 6753.3, 2020, NULL, NULL, 3),
+    (3, 'Gliese-163c', 28000, 2012, NULL, NULL, 2),
+    (6, '51_Pegasi_b', 135830 ,1995, FALSE, 0, 2),
+    (9, 'L 98-59-f', 3140, 2021, NULL, NULL, 2),
+    (12, 'Bocaprins',167820, 2011, NULL, NULL, 2),
+    (13, 'KOI-268.01', 112000, 2013, TRUE, 1, 2
         );
 
 CREATE TABLE moon(
