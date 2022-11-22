@@ -1,7 +1,8 @@
 # Build a Celestial_Body DB: FreeCondeCamp Realtional Database couse project
 
-This is the first requiered project in the FreeCodeCamp Relational Database certification.
-https://www.freecodecamp.org/learn/relational-database/build-a-celestial-bodies-database-project/build-a-celestial-bodies-database
+This is the first requiered project in the FreeCodeCamp Relational Database certification [HERE](https://www.freecodecamp.org/learn/relational-database/build-a-celestial-bodies-database-project/build-a-celestial-bodies-database).
+
+The implemented database was hosted in the website bit.io, and can be query [HERE](https://bit.io/MPedrazam/celestial_bodies_DB)
 
 The project aim to create and fill out a celestial bodies database by using PostgreSQL
 
