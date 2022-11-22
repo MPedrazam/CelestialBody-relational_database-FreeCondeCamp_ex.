@@ -4,7 +4,7 @@ psql --username=freecodecamp --dbname=postgres
 
 CREATE DATABASE Universe;
 
-CREATE TABLE tech(
+CREATE TABLE obs_technology(
                     tech_id SERIAL UNIQUE PRIMARY KEY, 
                     name VARCHAR UNIQUE NOT NULL, 
                     dev_year NUMERIC, 
@@ -12,7 +12,7 @@ CREATE TABLE tech(
                     developer VARCHAR 
                     );
   
-INSERT INTO tech(name, dev_year, country, developer) 
+INSERT INTO obs_technology(name, dev_year, country, developer) 
   VALUES (
      'optical', 1608,'Germany-Dutch', 'Hans Lippershey'),
      ('occultation', 1590, 'Germany', 'Michael Maestlin'),
@@ -21,7 +21,7 @@ INSERT INTO tech(name, dev_year, country, developer)
      ('radio_astronomy', 1933, 'USA','Karl_Jansky');
 
 
-CREATE TABLE galaxy(
+CREATE TABLE galaxies(
                     galaxy_id SERIAL UNIQUE PRIMARY KEY, 
                     name VARCHAR UNIQUE NOT NULL, 
                     constellation TEXT, 
@@ -30,11 +30,11 @@ CREATE TABLE galaxy(
                     distance_earth_Mly FLOAT,
                     size_ly INT,
                     tech_id INT,
-                    CONSTRAINT FK_tech_galaxy FOREIGN KEY (tech_id) REFERENCES tech(tech_id)
+                    CONSTRAINT FK_tech_galaxy FOREIGN KEY (tech_id) REFERENCES obs_technology(tech_id)
                     );
   
 
-INSERT INTO galaxy(name, constellation, type, year_disc, distance_earth_Mly, size_ly, tech_id) 
+INSERT INTO galaxies(name, constellation, type, year_disc, distance_earth_Mly, size_ly, tech_id) 
   VALUES(
     'Milky_way', 'Sagittaurus', 'barred_spiral', 1610, 0.026, 52850, 1),
     ('Andromeda', 'Andromeda', 'barred_spiral', 964, 2537, 110000, 1),
@@ -45,20 +45,20 @@ INSERT INTO galaxy(name, constellation, type, year_disc, distance_earth_Mly, siz
           );
     
     
-CREATE TABLE star(
+CREATE TABLE stars(
                     star_id SERIAL UNIQUE PRIMARY KEY, 
                     galaxy_id INT,
                     name VARCHAR UNIQUE NOT NULL, 
-                    type VARCHAR, 
+                    spectral_type VARCHAR, 
                     year_disc NUMERIC,
                     have_planets BOOLEAN,
                     n_planets INT,
                     tech_id INT, 
-                    CONSTRAINT FK_tech_star FOREIGN KEY (tech_id) REFERENCES tech(tech_id),
-                    CONSTRAINT FK_galaxy_star FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+                    CONSTRAINT FK_tech_star FOREIGN KEY (tech_id) REFERENCES obs_technology(tech_id),
+                    CONSTRAINT FK_galaxy_star FOREIGN KEY (galaxy_id) REFERENCES galaxies(galaxy_id)
                     );
                     
-INSERT INTO star(Galaxy_id, name, spectral_type, year_disc, have_planets, n_planets, tech_id)
+INSERT INTO stars(Galaxy_id, name, spectral_type, year_disc, have_planets, n_planets, tech_id)
   VALUES(1, 
     'Sun', 'G2V', 450, TRUE, 8, 1),
     (1, 'Kepler-1649', 'M5V', 2020, TRUE, 2, 4),
@@ -77,20 +77,20 @@ INSERT INTO star(Galaxy_id, name, spectral_type, year_disc, have_planets, n_plan
         );
     
    
-CREATE TABLE planet(
+CREATE TABLE planets(
                     planet_id SERIAL UNIQUE PRIMARY KEY, 
                     star_id INT,
                     name VARCHAR UNIQUE NOT NULL, 
-                    size_km FLOAT, 
+                    radius_size_km FLOAT, 
                     year_disc NUMERIC,
                     have_moons BOOLEAN,
                     n_moons INT,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_planet FOREIGN KEY (tech_id) REFERENCES tech(tech_id),
-                    CONSTRAINT FK_star_planet FOREIGN KEY (star_id) REFERENCES star(star_id)
+                    CONSTRAINT FK_tech_planet FOREIGN KEY (tech_id) REFERENCES obs_technology(tech_id),
+                    CONSTRAINT FK_star_planet FOREIGN KEY (star_id) REFERENCES stars(star_id)
                     );
 
-INSERT INTO planet(star_id, name, radius_size_km, year_disc, have_moons, n_moons, tech_id)
+INSERT INTO planets(star_id, name, radius_size_km, year_disc, have_moons, n_moons, tech_id)
   VALUES(
     1,'Earth', 12742, NULL, TRUE, 1, 2),
     (1, 'Mars', 6778, 1610, TRUE, 2, 1),
@@ -98,6 +98,9 @@ INSERT INTO planet(star_id, name, radius_size_km, year_disc, have_moons, n_moons
     (1, 'Venus', 12104, 1610, FALSE, 0, 1),
     (1, 'Jupiter', 139820, 1610, TRUE, 80, 1),
     (1, 'Neptune', 49244, 1846, TRUE, 14, 1),
+    (1, 'Saturn', 58232, 1610, TRUE, 83, 1),
+    (1, 'Pluto', 1188.3, 1930, TRUE, 4, 1),
+    (1, 'Uranus', 25362, 1781, TRUE, 27, 1),
     (2, 'Kepler-1649c', 6753.3, 2020, NULL, NULL, 3),
     (3, 'Gliese-163c', 28000, 2012, NULL, NULL, 2),
     (6, '51_Pegasi_b', 135830 ,1995, FALSE, 0, 2),
@@ -106,36 +109,51 @@ INSERT INTO planet(star_id, name, radius_size_km, year_disc, have_moons, n_moons
     (13, 'KOI-268.01', 112000, 2013, TRUE, 1, 3
         );
 
-CREATE TABLE moon(
+CREATE TABLE moons(
                     moon_id SERIAL UNIQUE PRIMARY KEY, 
                     planet_id INT,
                     name VARCHAR UNIQUE NOT NULL, 
-                    size_km FLOAT, 
+                    radius_size_km FLOAT, 
                     year_disc NUMERIC,
                     Tech_id INT, 
-                    CONSTRAINT FK_tech_moom FOREIGN KEY (tech_id) REFERENCES tech(tech_id),
-                    CONSTRAINT FK_planet_moom FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+                    CONSTRAINT FK_tech_moom FOREIGN KEY (tech_id) REFERENCES obs_technology(tech_id),
+                    CONSTRAINT FK_planet_moom FOREIGN KEY (planet_id) REFERENCES planets(planet_id)
                     );
     
-INSERT INTO moon(planet_id, name, size_km, year_disc, tech_id)
+INSERT INTO moons(planet_id, name, radius_size_km, year_disc, tech_id)
   VALUES(
-    13, 'Moon', 3474, 428, 1),
-    (14, 'Phobos', 22.2, 1877, 2),
-    (14, 'Deimos', 6.2, 1877, 4),
-    (17, 'Io', 1821.6, 1610, 2),
-    (17, 'Europa', 1560.8, 1610, 2),
-    (17, 'Ganymede', 2631, 1610, 1),
-    (17, 'Callisto', 2410.3, 1610, 1),
-    (17, 'Amalthea', 83.5, 1979, 2),
-    (17, 'Metis', 43, 1979, 2),
-    (17, 'Adrasthea', 16.4, 1979, 2),
-    (17, 'Thebe', 98.6, 1979, 1),
-    (17, 'Leda', 21.5, 1974, 2),
-    (18, 'Triton', 1353.4, 1846, 1),
-    (18, 'Nereid', 170, 1949, 2),
-    (18, 'Galatea', 87.4, 1989, 1),
-    (18, 'Despina', 75, 1989, 2),
-    (18, 'Proteus', 210, 1989, 2),
-    (18, 'Thalassa', 41, 1989, 2),
-    (18, 'Halimede', 31, 2002, 2),
-    (24, 'KOI-268.01_moon', NULL, 2013, 3);
+    1, 'Moon', 3474, 428, 1),
+    (2, 'Phobos', 22.2, 1877, 2),
+    (2, 'Deimos', 6.2, 1877, 4),
+    (5, 'Io', 1821.6, 1610, 2),
+    (5, 'Europa', 1560.8, 1610, 2),
+    (5, 'Ganymede', 2631, 1610, 1),
+    (5, 'Callisto', 2410.3, 1610, 1),
+    (5, 'Amalthea', 83.5, 1979, 2),
+    (5, 'Metis', 43, 1979, 2),
+    (5, 'Adrasthea', 16.4, 1979, 2),
+    (5, 'Thebe', 98.6, 1979, 1),
+    (5, 'Leda', 21.5, 1974, 2),
+    (6, 'Triton', 1353.4, 1846, 1),
+    (6, 'Nereid', 170, 1949, 2),
+    (6, 'Galatea', 87.4, 1989, 1),
+    (6, 'Despina', 75, 1989, 2),
+    (6, 'Proteus', 210, 1989, 2),
+    (6, 'Thalassa', 41, 1989, 2),
+    (6, 'Halimede', 31, 2002, 2),
+    (7, 'Titan', 2474.3, 1965, 1), 
+    (7, 'Enceladus', 500, 1789, 1), 
+    (7, 'Mimas', 198.2, 1789, 2), 
+    (7, 'Atlas', 15, 1980, 1), 
+    (7, 'Lapetus', 734.5, 1671, 2), 
+    (5, 'Elara', 80, 1905, 1), 
+    (5, 'Himalia', 149, 1904, 1), 
+    (5, 'Callirrhoe', 1.3, 2000, 1), 
+    (5, 'Carpo', 3, 2003, 1), 
+    (8, 'Charon', 606, 1978, 1), 
+    (5, 'Eukelade', 4, 2033, 3),
+    (7, 'Hyperion', 135, 1848, 1), 
+    (7, 'Iapetus', 734.5, 1671, 1),
+    (9, 'Miranda', 500, 1986, 1), 
+    (15, 'KOI-268.01_moon', NULL, 2013, 3)
+      ;
