@@ -38,10 +38,10 @@ INSERT INTO galaxy(name, constellation, type, year_disc, distance_earth_Mly, siz
   VALUES(
     'Milky_way', 'Sagittaurus', 'barred_spiral', 1610, 0.026, 52850, 1),
     ('Andromeda', 'Andromeda', 'barred_spiral', 964, 2537, 110000, 1),
-    ('Centaurus_A', 'Centaurus', 'elliptical', 1826, 13.5, 48500, 1),
-    ('Canis_Major_dwarf', 'Canis_Major', 'irregular', 2003, 0.025, 16800, 1),
-    ('Large_Magellanic_cloud', 'Dorado', 'barred_dwarf_spiral', 1913, 0.163, 7000, 1),
-    ('Sombrero', 'Virgo', 'elliptical', NULL, 0.490, 25000 ,2
+    ('Centaurus_A', 'Centaurus', 'elliptical', 1826, 13.5, 48500, 5),
+    ('Canis_Major_dwarf', 'Canis_Major', 'irregular', 2003, 0.025, 16800, 5),
+    ('Large_Magellanic_cloud', 'Dorado', 'barred_dwarf_spiral', 1913, 0.163, 7000, 4),
+    ('Sombrero', 'Virgo', 'elliptical', NULL, 0.490, 25000 ,5
           );
     
     
@@ -58,7 +58,7 @@ CREATE TABLE star(
                     CONSTRAINT FK_galaxy_star FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
                     );
                     
-INSERT INTO star(Galaxy_id, name, type, year_disc, have_planets, n_planets, tech_id)
+INSERT INTO star(Galaxy_id, name, spectral_type, year_disc, have_planets, n_planets, tech_id)
   VALUES(1, 
     'Sun', 'G2V', 450, TRUE, 8, 1),
     (1, 'Kepler-1649', 'M5V', 2020, TRUE, 2, 4),
@@ -72,7 +72,8 @@ INSERT INTO star(Galaxy_id, name, type, year_disc, have_planets, n_planets, tech
     (1, 'Antares', 'B2.5V', 1819, FALSE, 0, 3),
     (1, 'Mu_Cephei', 'M2-Ia', 1881, FALSE, 0, 5),
     (1, 'WASP-39 ', 'G8', 2011, TRUE, 1, 4),
-    (1, 'KOI-268', NULL, 2013, TRUE, 1, 3
+    (1, 'KOI-268', NULL, 2013, TRUE, 1, 3),
+    (2, 'Vega', 'A0Va', 2005, FALSE, 0, 4
         );
     
    
@@ -89,7 +90,7 @@ CREATE TABLE planet(
                     CONSTRAINT FK_star_planet FOREIGN KEY (star_id) REFERENCES star(star_id)
                     );
 
-INSERT INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons, tech_id)
+INSERT INTO planet(star_id, name, radius_size_km, year_disc, have_moons, n_moons, tech_id)
   VALUES(
     1,'Earth', 12742, NULL, TRUE, 1, 2),
     (1, 'Mars', 6778, 1610, TRUE, 2, 1),
@@ -101,8 +102,8 @@ INSERT INTO planet(star_id, name, size_km, year_disc, have_moons, n_moons, tech_
     (3, 'Gliese-163c', 28000, 2012, NULL, NULL, 2),
     (6, '51_Pegasi_b', 135830 ,1995, FALSE, 0, 2),
     (9, 'L 98-59-f', 3140, 2021, NULL, NULL, 2),
-    (12, 'Bocaprins',167820, 2011, NULL, NULL, 2),
-    (13, 'KOI-268.01', 112000, 2013, TRUE, 1, 2
+    (12, 'Bocaprins',167820, 2011, NULL, NULL, 4),
+    (13, 'KOI-268.01', 112000, 2013, TRUE, 1, 3
         );
 
 CREATE TABLE moon(
@@ -118,13 +119,13 @@ CREATE TABLE moon(
     
 INSERT INTO moon(planet_id, name, size_km, year_disc, tech_id)
   VALUES(
-    13, 'Moon', 1731.4, 428, 1),
-    (14, 'Phobos', 11267, 1877, 3),
+    13, 'Moon', 3474, 428, 1),
+    (14, 'Phobos', 22.2, 1877, 2),
     (14, 'Deimos', 6.2, 1877, 4),
     (17, 'Io', 1821.6, 1610, 2),
     (17, 'Europa', 1560.8, 1610, 2),
     (17, 'Ganymede', 2631, 1610, 1),
-    (17, 'Calisto', 2410.3, 1610, 1),
+    (17, 'Callisto', 2410.3, 1610, 1),
     (17, 'Amalthea', 83.5, 1979, 2),
     (17, 'Metis', 43, 1979, 2),
     (17, 'Adrasthea', 16.4, 1979, 2),
